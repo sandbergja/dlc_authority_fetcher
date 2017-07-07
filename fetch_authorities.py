@@ -19,6 +19,7 @@ try:
             for result in response:
                 if i < 6:
                     i = i + 1
+                    print("fetching record " + str(i))
                     auth_id = re.search('.*\/authorities\/.*\/(.*)', result.link).group(1)
                     auth_file_url = 'http://lccn.loc.gov/' + auth_id + '/marcxml'
                     time.sleep(20)
@@ -32,6 +33,8 @@ try:
                         os.remove('tmp.marcxml')
                     except SAXParseException:
                         print('Could not parse MARCXML file')
+                else:
+                    break
 except IOError:
     print("File '%s' doesn't exist", fname)
     exit(1)
