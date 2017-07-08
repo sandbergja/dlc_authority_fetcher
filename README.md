@@ -1,2 +1,11 @@
 # dlc_authority_fetcher
-Given a file of authorized strings, it will return the MARC authorities from Library of Congress
+Given a file of headings, it will return matching MARC authorities from Library of Congress
+
+By default, it waits 20 seconds between each request (the Library of Congress "recommends that software programs submit a total of no more than 10 requests per minute").
+
+Your file should be formatted like so:
+
+    Moran, Peggy, 1960-
+    Golden retriever
+    Dogs
+    Our best friends
