@@ -13,7 +13,7 @@ try:
     search_client = Client('http://id.loc.gov/opensearch/')
     with open(fname) as authorized_terms:
         for term in authorized_terms:
-            print term
+            print(term)
             response = search_client.search(term.lstrip().rstrip('.,;'))
             i = 0
             for result in response:
