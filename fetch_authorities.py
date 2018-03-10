@@ -22,7 +22,7 @@ try:
                     if 'authorities' in result.link:
                         auth_id = re.search('.*\/authorities\/.*\/(.*)', result.link).group(1)
                         auth_file_url = 'http://lccn.loc.gov/' + auth_id + '/marcxml'
-                        time.sleep(20)
+                        time.sleep(10)
                         urllib.urlretrieve (auth_file_url, 'tmp.marcxml')
                         try:
                             records = marcxml.parse_xml_to_array('tmp.marcxml')
