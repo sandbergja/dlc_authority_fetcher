@@ -2,16 +2,15 @@ from opensearch import Client
 from pymarc import MARCWriter, marcxml
 from string import punctuation
 from xml.sax._exceptions import SAXParseException
-import os, re, sys, time, urllib
+import argparse, os, re, sys, time, urllib
 
-if len(sys.argv) < 2:
-    print("Please include the filename")
-    exit(1)
+parser = argparse.ArgumentParser(description='Fetch MARC authority records from the Library of Congress')
+parser.add_argument('filename', help='a file with headings on separate lines')
+args = parser.parse_args()
 
-fname = sys.argv[1]
 try:
     search_client = Client('http://id.loc.gov/opensearch/')
-    with open(fname) as authorized_terms:
+    with open(args.filename) as authorized_terms:
         for term in authorized_terms:
             print(term)
             response = search_client.search(term.lstrip().rstrip('.,;'))
@@ -37,5 +36,5 @@ try:
                 else:
                     break
 except IOError:
-    print("File '%s' doesn't exist", fname)
+    print("File '%s' doesn't exist", args.filename)
     exit(1)
