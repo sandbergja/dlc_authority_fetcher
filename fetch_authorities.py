@@ -7,6 +7,7 @@ import argparse, os, re, sys, time, urllib
 parser = argparse.ArgumentParser(description='Fetch MARC authority records from the Library of Congress')
 parser.add_argument('filename', help='a file with headings on separate lines')
 parser.add_argument('--matches', type=int, default=5, help='maximum number of matching records to download for each heading')
+parser.add_argument('--output', '-o', default='authorities_to_load.mrc', help='name of the MARC file that you are downloading records into')
 vocabularies = parser.add_mutually_exclusive_group()
 vocabularies.add_argument('--lcnaf-only', help='only download name authority records', action='store_true')
 vocabularies.add_argument('--lcsh-only', help='only download subject authority records', action='store_true')
@@ -44,7 +45,7 @@ try:
                             urllib.urlretrieve (auth_file_url, 'tmp.marcxml')
                             try:
                                 records = marcxml.parse_xml_to_array('tmp.marcxml')
-                                writer = MARCWriter(file('authorities_to_load.mrc', 'ab'))
+                                writer = MARCWriter(file(args.output, 'ab'))
                                 for r in records:
                                     writer.write(r)
                                     writer.close()
