@@ -6,6 +6,7 @@ import argparse, os, re, sys, time, urllib
 
 parser = argparse.ArgumentParser(description='Fetch MARC authority records from the Library of Congress')
 parser.add_argument('filename', help='a file with headings on separate lines')
+parser.add_argument('--matches', type=int, default=5, help='maximum number of matching records to download for each heading')
 args = parser.parse_args()
 
 try:
@@ -16,9 +17,8 @@ try:
             response = search_client.search(term.lstrip().rstrip('.,;'))
             i = 0
             for result in response:
-                if i < 6:
+                if i < args.matches:
                     i = i + 1
-                    print("fetching record " + str(i))
                     if 'authorities' in result.link:
                         auth_id = re.search('.*\/authorities\/.*\/(.*)', result.link).group(1)
                         auth_file_url = 'http://lccn.loc.gov/' + auth_id + '/marcxml'
