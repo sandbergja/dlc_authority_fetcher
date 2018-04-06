@@ -13,3 +13,5 @@ Your file should be formatted like so:
     Our best friends
 
 You can get a complete list of options by running `python fetch_authorities.py -h`
+
+Special thanks to Josh Stompro for all your help with the specifics of id.loc.gov searching!

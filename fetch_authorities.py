@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser(description='Fetch MARC authority records from 
 parser.add_argument('filename', help='a file with headings on separate lines')
 parser.add_argument('--matches', type=int, default=5, help='maximum number of matching records to download for each heading')
 parser.add_argument('--output', '-o', default='authorities_to_load.mrc', help='name of the MARC file that you are downloading records into')
+parser.add_argument('--exact', '-e', help='only download authority records that match the heading exactly', action='store_true')
 vocabularies = parser.add_mutually_exclusive_group()
 vocabularies.add_argument('--lcnaf-only', help='only download name authority records', action='store_true')
 vocabularies.add_argument('--lcsh-only', help='only download subject authority records', action='store_true')
@@ -30,7 +31,10 @@ try:
             heading_suffix = ''
 
         for term in authorized_terms:
-            response = search_client.search(term.lstrip().rstrip('.,;') + heading_suffix)
+            term_for_search = term.lstrip().rstrip('.,;')
+            if args.exact:
+                term_for_search = 'aLabel:"' + term_for_search + '"'
+            response = search_client.search(term_for_search + heading_suffix)
             if response.totalResults:
                 if args.print_matched_headings:
                     print(term)
