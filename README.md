@@ -16,6 +16,8 @@ Your file should be formatted like so:
     Dogs
     Our best friends
 
+Run the script by calling `python fetch_authorities.py list_of_headings_to_search`, where list_of_headings_to_search is a file formatted as in the example above.
+
 There are several options regarding searching specific thesauri, etc.  You can get a complete list of options by running `python fetch_authorities.py -h`
 
 ## Restrictions
