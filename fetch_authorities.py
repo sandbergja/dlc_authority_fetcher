@@ -31,9 +31,10 @@ try:
             heading_suffix = ''
 
         for term in authorized_terms:
-            term_for_search = term.lstrip().rstrip('.,;')
             if args.exact:
-                term_for_search = 'aLabel:"' + term_for_search + '"'
+                term_for_search = 'aLabel:"' + term.lstrip().rstrip() + '"'
+            else:
+                term_for_search = term.lstrip().rstrip('.,;')
             response = search_client.search(term_for_search + heading_suffix)
             if response.totalResults:
                 if args.print_matched_headings:
