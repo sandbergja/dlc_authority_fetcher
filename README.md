@@ -24,6 +24,8 @@ There are several options regarding searching specific thesauri, etc.  You can g
 
 By default, this script waits 10 seconds between each request (the Library of Congress "recommends that software programs submit a total of no more than 10 requests per minute").
 
+For this reason, it is strongly recommended that you only run one instance of this script at once.
+
 ## Acknowledgments
 
 Special thanks to Josh Stompro for all your help with the specifics of id.loc.gov searching!
