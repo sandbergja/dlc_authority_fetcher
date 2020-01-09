@@ -18,6 +18,8 @@ Your file should be formatted like so:
 
 Run the script by calling `python fetch_authorities.py list_of_headings_to_search`, where list_of_headings_to_search is a file formatted as in the example above.
 
+By default, it should append all downloaded authority records to a file called authorities_to_load.mrc.  You can change this with the `-o` or `--output` flag.  For example, you could run `python fetch_authorities.py -o records.mrc list_of_headings_to_search` if you want the authority records to go into a file called records.mrc.
+
 There are several options regarding searching specific thesauri, etc.  You can get a complete list of options by running `python fetch_authorities.py -h`
 
 ## Restrictions
